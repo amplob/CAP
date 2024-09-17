@@ -1,3 +1,3 @@
-(ns hola_mon)
+(ns hello)
 (defn -main []
   (println "Hola món!"))
