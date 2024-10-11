@@ -95,16 +95,40 @@
     )
 )
 
-;o és una operació
-(defn opera [o x y]
-    (cond
-        (= o '(*)) (* x y)
-        (= o '(+)) (+ x y)
-        (= o '(/)) (/ x y)
-        (= o '(/)) (/ x y)
+
+;; Function to perform operations based on the operator symbol
+(defn opera [x y o]
+  (o x y)
+)
+
+(defn op? [c]
+    (cond 
+        (= c \+) true
+        (= c \-) true
+        (= c \*) true
+        (= c \/) true
+        :else false
+    )
+)
+
+
+(defn rpf [l sk r]
+    (println l sk r)
+    (if (empty? l)
+        r
+        (if (op? (first l))
+            (recur (rest l) (rest sk) (opera (first sk) r (first l))) ; pop
+            (recur (rest l) (cons (first l) sk) r) ; push
+        )
     )
 )
 
 (defn post-fixa [l]
-    
+    (rpf (rest l) '() (first l))
 )
+
+
+(println (post-fixa '(10 1 +))) ; Output: 11
+(println (post-fixa '(10 1 + 2 *))) ; Output: 22
+
+;:else (throw (Exception. "Invalid operator"))) ; Handle invalid operators
