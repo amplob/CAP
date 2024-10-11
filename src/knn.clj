@@ -1,5 +1,11 @@
 (ns knn)
 
+
+(use 'iris :reload-all)
+
+
+
+
 (defn de [v w]
     (Math/sqrt
         (reduce + (map 
@@ -40,3 +46,14 @@
 (println  (dh [:a :b] [:b :b]) )
 (println  (dh [:a :a :a] [:b :b :b]) )
 
+
+
+(defn classificacio [taula ex fd]
+  (reduce min (map 
+    (fn [t1] (fd ex t1)) 
+    taula)
+  )
+
+)
+
+(println  (classificacio iris tst-iris de) )
