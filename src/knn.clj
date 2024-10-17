@@ -48,15 +48,24 @@
 
 
 
-(defn classificacio [taula ex fd]
-  (let [distances (map (fn [t1] 
-                          [(fd ex (:x t1)) (:y t1)]) 
-                        taula)]   
-    (reduce (fn [min current]
-              (if (< (first current) (first min))
-                current
-                min))
-            (first distances) 
-            distances)))
+(defn knn [func_dist taula]
+    (fn [ex]
+        (let [distances (map (fn [t1] 
+                              [(func_dist ex (:x t1)) (:y t1)]) ; Return distance and label
+                            taula)   ;; lee la tabla de distancias
+       nearest (apply min-key first distances)] ; Encuentra el más cercano
+      (second nearest))))
 
-(println  (classificacio iris tst-iris de) )
+
+
+;; Crear funciones KNN para iris y mushroom
+(def classify-iris (knn de iris))
+(def classify-mushroom (knn dh mushroom))
+
+;; Ejecutar la clasificación
+(println "Clase Iris:" (classify-iris tst-iris)) ; Devuelve la clase del vecino más cercano para iris
+(println "Clase Iris:" (classify-iris tst-iris2)) ; Devuelve la clase del vecino más cercano para iris
+(println "Clase Iris:" (classify-iris tst-iris3)) ; Devuelve la clase del vecino más cercano para iris
+
+(println "Clase Mushroom:" (classify-mushroom tst-mushroom)) ; Devuelve la clase del vecino más cercano para mushroom
+
