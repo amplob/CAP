@@ -44,9 +44,10 @@
 ;;     )
 ;; )
 
+
 (defn pot-anar3 [ini fi]
   (let [movposs (moviments3 ini)]
-    (some #(= fi %) movposs)))
+    (not (nil? (some #(= fi %) movposs)))))
 
 
 
