@@ -43,6 +43,36 @@
   (process-actions programa {}))
 
 
+
+;;proves
 (interpretar '((:ass "a" (:val 2))
                (:view (:div (:var "a") (:val 0)))
                (:view (:add (:var "a") (:val 1)))))
+
+(interpretar
+ '((:ass "x" (:val 10))
+   (:ass "y" (:mul (:var "x") (:val 2)))
+   (:view (:add (:var "x") (:var "y")))))
+
+(interpretar
+ '((:ass "a" (:val 5))
+   (:ass "b" (:val 3))
+   (:view (:sub (:var "a") (:var "b")))
+   (:view (:mul (:var "a") (:var "b")))))
+
+(interpretar
+ '((:ass "n" (:val 10))
+   (:ass "d" (:val 0))
+   (:view (:div (:var "n") (:var "d")))))
+
+(interpretar
+ '((:view (:var "z"))
+   (:ass "z" (:val 7))
+   (:view (:var "z"))))
+
+(interpretar
+ '((:ass "x" (:val 4))
+   (:ass "y" (:add (:var "x") (:val 6)))
+   (:ass "z" (:mul (:var "y") (:val 2)))
+   (:view (:sub (:var "z") (:var "x"))) ;;20 - 4 = 16
+   (:view (:div (:var "z") (:var "x"))))) ;; 20 / 4 = 5
