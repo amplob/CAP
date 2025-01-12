@@ -1,3 +1,7 @@
+;Gisela Borràs Zaplana
+;Marc Planas Bosch
+
+
 (ns animals
   (:require [clojure.string :as str]))
 

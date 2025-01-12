@@ -1,3 +1,6 @@
+;Gisela Borràs Zaplana
+;Marc Planas Bosch
+
 (ns cavall)
 
 (defn dins [posicio]
