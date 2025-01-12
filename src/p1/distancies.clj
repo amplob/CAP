@@ -33,14 +33,6 @@
     )
 )
 
-<<<<<<< HEAD:src/p1/distancies.clj
-;(println (de [1 0] [1 1]) )
-;(println (de [0 0 0] [1 1 1]) )
-;(println (dm [1 0] [1 1]) )
-;(println (dm [0 0 0] [1 1 1])  )
-;(println  (dh [:a :b] [:b :b]) )
-;(println  (dh [:a :a :a] [:b :b :b]) )
-=======
 (println (de [1 0] [1 1]) )
 (println (de [0 0 0] [1 1 1]) )
 (println (dm [1 0] [1 1]) )
@@ -71,4 +63,3 @@
 
 (println "Clase Mushroom:" (classify-mushroom tst-mushroom)) ; Devuelve la clase del vecino más cercano para mushroom
 
->>>>>>> 52a99f9ebb65ebec1b4c5f9f09a746df58dac14b:src/knn.clj
