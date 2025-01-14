@@ -1,28 +1,32 @@
-(ns animales
+;Gisela Borràs Zaplana
+;Marc Planas Bosch
+
+
+(ns animals
   (:require [clojure.string :as str]))
 
-(defprotocol Animal
-  (parlar [this]))
+;Definició d'animal utilitzant clausures
+(defn animal []
+  {:parlar (fn [] "grr")})
 
-(defrecord Gat []
-  Animal
-  (parlar [this] "meu"))
+;Redefinir el mètode parlar en la subclasse gat
+(defn gat []
+  {:parlar (fn [] "mèu")})
 
-(defrecord Tigre []
-  Animal
-  (parlar [this] "grr"))
+;Definició de la subclasse tigre, heretant parlar d'animal
+(defn tigre []
+  (let [super (animal)]
+    {:parlar (:parlar super)}))
 
-(defrecord AnimalGen []
-  Animal
-  (parlar [this] "grr"))
-
+;Crida n vegades a parlar d'animal
 (defn parlarN [animal n]
-  (println (str/join " " (repeat n (parlar animal)))))
+  (println (str/join " " (repeat n ((:parlar animal))))))
 
-(def animal (->AnimalGen))
-(def gat (->Gat))
-(def tigre (->Tigre))
+;; Joc de proves:
+(def a (animal))
+(def g (gat))
+(def t (tigre))
 
-(parlarN animal 3)  ; Salida: grr grr grr
-(parlarN gat 3)     ; Salida: mèu mèu mèu
-(parlarN tigre 3)   ; Salida: grr grr grr
+(parlarN a 3)  ; Esperat: grr grr grr
+(parlarN g 3)  ; Esperat: mèu mèu mèu
+(parlarN t 3)  ; Esperat: grr grr grr

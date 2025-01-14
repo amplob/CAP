@@ -1,13 +1,18 @@
+;Gisela Borràs Zaplana
+;Marc Planas Bosch
+
 (ns cavall)
 
 (defn dins [posicio]
   (let [[fila col] posicio]
     (and (<= 1 fila 8) (<= 1 col 8))))
 
+
 (defn moviments [posicio]
   (let [[fila col] posicio
         moviments-relatius '([-2 -1] [-2 1] [-1 -2] [-1 2] [1 -2] [1 2] [2 -1] [2 1])]
     (filter dins (map (fn [[df dc]] [(+ fila df) (+ col dc)]) moviments-relatius))))
+
 
 
 (defn pot-anar1 [ini fi]
@@ -16,7 +21,16 @@
     )
 )
 
-
+(defn pot-anar3 [ini fi]
+    (->> ini
+        moviments
+        (map moviments)
+        (apply concat )
+        (map moviments)
+        (apply concat ) 
+        (some #(= fi %))
+    )
+)
 
 
 (defn moviments2 [ini]
@@ -44,19 +58,11 @@
 ;;     )
 ;; )
 
-
-(defn pot-anar3 [ini fi]
-  (let [movposs (moviments3 ini)]
-    (not (nil? (some #(= fi %) movposs)))))
-
+;;(defn pot-anar3 [ini fi]
+;;  (let [movposs (moviments3 ini)]
+;;    (some #(= fi %) movposs)))
 
 
-(defn pot-anar-n [n ini fi]
-    (if (= n 1)
-        (contains? ini fi)
-        (pot-anar-n ) 
-    )
-)
 
 ;; Joc de proves
 ;; (println (dins '(4 5)))  ;; true
